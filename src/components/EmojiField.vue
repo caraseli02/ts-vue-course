@@ -1,6 +1,10 @@
 <script lang="ts" setup>
 import UseEmojis from "@/composables/UseEmojis";
+import { inject } from "vue";
+import { userInjectionKey } from "@/InjectionKeys";
+
 const { emojis } = UseEmojis();
+const injectedUser = inject(userInjectionKey);
 
 defineProps(["modelValue"]);
 defineEmits(["update:modelValue"]);
@@ -8,6 +12,7 @@ defineEmits(["update:modelValue"]);
 
 <template>
   <div class="emoji-container">
+    {{ injectedUser?.username }}
     <component
       v-for="emoji in emojis"
       :is="emoji.component"
